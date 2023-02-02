@@ -1,14 +1,15 @@
-import java.util.Arrays;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.util.List;
 
 public class Battle {
-    private Monster[] monsters;
-    private Hero[] heroes;
+    private List<Monster> monsters;
+    private List<Hero> heroes;
     private boolean turn = true;
     private String winners;
 
-    public Battle(Hero[] heroes, Monster[] monsters) {
+    public Battle() {
+    }
+
+    public Battle(List<Hero> heroes, List<Monster> monsters) {
         this.monsters = monsters;
         this.heroes = heroes;
     }
@@ -32,7 +33,7 @@ public class Battle {
             turnCount++;
         }
 
-        if (getHeroes().length > 0) {
+        if (getHeroes().size() > 0) {
             winners = "HEROES";
         } else {
             winners = "MONSTERS";
@@ -42,13 +43,11 @@ public class Battle {
     }
 
     private void removeDeadCharacter() {
-        Stream<Hero> heroStream = Arrays.stream(getHeroes()).filter(hero -> hero.getHp() > 0);
-        Hero[] aliveHeroes = heroStream.toArray(Hero[]::new);
-        setHeroes(aliveHeroes);
+        List<Hero> heroesAlive = heroes.stream().filter(hero -> hero.getHp() <= 0).toList();
+        setHeroes(heroesAlive);
 
-        Stream<Monster> monsterStream = Arrays.stream(monsters).filter(monster -> monster.getHp() > 0);
-        Monster[] aliveMonsters = monsterStream.toArray(Monster[]::new);
-        setMonsters(aliveMonsters);
+        List<Monster> monstersAlive = monsters.stream().filter(monster -> monster.getHp() <= 0).toList();
+        setMonsters(monstersAlive);
     }
 
     private void showInformation() {
@@ -56,7 +55,7 @@ public class Battle {
     }
 
     private boolean checkIfTheBattleIsOver() {
-        return getMonsters().length > 0 && getHeroes().length > 0;
+        return getMonsters().size() > 0 && getHeroes().size() > 0;
     }
 
     private void heroesAttack() {
@@ -75,27 +74,35 @@ public class Battle {
         }
     }
 
-    public Monster[] getMonsters() {
+    public void addHero(Hero hero) {
+        heroes.add(hero);
+    }
+
+    public void addMonster(Monster monster) {
+        monsters.add(monster);
+    }
+
+    public List<Monster> getMonsters() {
         return monsters;
     }
 
-    public void setMonsters(Monster[] monsters) {
+    public void setMonsters(List<Monster> monsters) {
         this.monsters = monsters;
     }
 
-    public Hero[] getHeroes() {
+    public List<Hero> getHeroes() {
         return heroes;
     }
 
-    public void setHeroes(Hero[] heroes) {
+    public void setHeroes(List<Hero> heroes) {
         this.heroes = heroes;
     }
 
     @Override
     public String toString() {
         return "Battle{" +
-                "monsters=" + Arrays.toString(monsters) +
-                ", heroes=" + Arrays.toString(heroes) +
+                "monsters=" + monsters.toString() +
+                ", heroes=" + heroes.toString() +
                 '}';
     }
 }

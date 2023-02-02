@@ -6,4 +6,12 @@ public class Hero extends Character {
         this.setDefense(25);
         this.setCriticalChance(0.25f);
     }
+
+    public Hero(String name, int hp, int attack, int defense, float criticalChance) {
+        this.setName(name);
+        this.setHp(hp);
+        this.setAttack(attack);
+        this.setDefense(defense);
+        this.setCriticalChance(criticalChance);
+    }
 }
