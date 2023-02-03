@@ -6,4 +6,8 @@ public class Monster extends Character {
         this.setDefense(25);
         this.setCriticalChance(0.15f);
     }
+
+    public Monster(String name, int hp, int attack, int defense, float criticalChance) {
+        super(name, hp, attack, defense, criticalChance);
+    }
 }

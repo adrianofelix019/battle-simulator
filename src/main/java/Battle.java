@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class Battle {
@@ -7,6 +8,8 @@ public class Battle {
     private String winners;
 
     public Battle() {
+        monsters = new ArrayList<>();
+        heroes = new ArrayList<>();
     }
 
     public Battle(List<Hero> heroes, List<Monster> monsters) {

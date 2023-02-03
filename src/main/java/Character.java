@@ -11,6 +11,14 @@ public class Character {
 
     }
 
+    public Character(String name, int hp, int attack, int defense, float criticalChance) {
+        this.name = name;
+        this.hp = hp;
+        this.attack = attack;
+        this.defense = defense;
+        this.criticalChance = criticalChance;
+    }
+
     public void attackOpponent(Character opponent) {
         Random random = new Random();
         boolean isCritic = random.nextFloat(0, 1) < criticalChance;

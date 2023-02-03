@@ -16,7 +16,18 @@ public class Application {
 
         try {
             int option = Integer.parseInt(stringOption);
-            createHero();
+
+            switch (option) {
+                case 1:
+                    createHero();
+                    break;
+                case 2:
+                    createMonster();
+                    break;
+                case 3:
+                    listCharacters();
+            }
+
         } catch (NumberFormatException e) {
             cleanConsole();
             System.out.println("INVALID OPTION, PLEASE TRY AGAIN.");
@@ -24,22 +35,49 @@ public class Application {
         }
     }
 
-    private void createHero() {
-        Scanner in = new Scanner(System.in);
-        System.out.print("HERO'S NAME: ");
-        String name = in.next();
-        System.out.println("SET HERO'S HP: ");
-        int hp = in.nextInt();
-        System.out.println("SET HERO'S ATTACK: ");
-        int attack = in.nextInt();
-        System.out.println("SET HERO'S DEFENSE: ");
-        int defense = in.nextInt();
-        System.out.println("SET HERO'S CRITICAL CHANCE (BETWEEN 0 AND 100): ");
-        int criticalChance = in.nextInt();
-        Hero hero = new Hero(name, hp, attack, defense, criticalChance);
-        battle.addHero(hero);
-        in.close();
+    private void listCharacters() {
+        System.out.println("===\tHEROES\t===");
+        for (Hero hero : battle.getHeroes()) {
+            System.out.println(hero);
+        }
+
+        System.out.println("===\tMONSTERS\t===");
+        for (Monster monster : battle.getMonsters()) {
+            System.out.println(monster);
+        }
+
         showMenu();
+    }
+
+    private void createHero() {
+        Hero newHero = (Hero) getCharacterInformation("HERO");
+        battle.getHeroes().add(newHero);
+        showMenu();
+    }
+
+    private void createMonster() {
+        Monster newMonster = (Monster) getCharacterInformation("MONSTER");
+        battle.getMonsters().add(newMonster);
+        showMenu();
+    }
+
+    private Character getCharacterInformation(String kind) {
+        Scanner in = new Scanner(System.in);
+        System.out.print(kind + "'S NAME: ");
+        String name = in.next();
+        System.out.println("SET " + kind + "'S HP: ");
+        int hp = in.nextInt();
+        System.out.println("SET " + kind + "'S ATTACK: ");
+        int attack = in.nextInt();
+        System.out.println("SET " + kind + "'S DEFENSE: ");
+        int defense = in.nextInt();
+        System.out.println("SET " + kind + "'S CRITICAL CHANCE (BETWEEN 0 AND 100): ");
+        int criticalChance = in.nextInt();
+
+        if (kind.equalsIgnoreCase("monster"))
+            return new Monster(name, hp, attack, defense, criticalChance);
+        else
+            return new Hero(name, hp, attack, defense, criticalChance);
     }
 
     private void cleanConsole() {
