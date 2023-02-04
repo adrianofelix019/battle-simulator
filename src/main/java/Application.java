@@ -18,18 +18,12 @@ public class Application {
             int option = Integer.parseInt(stringOption);
 
             switch (option) {
-                case 1:
-                    createHero();
-                    break;
-                case 2:
-                    createMonster();
-                    break;
-                case 3:
-                    listCharacters();
+                case 1 -> createHero();
+                case 2 -> createMonster();
+                case 3 -> listCharacters();
             }
 
         } catch (NumberFormatException e) {
-            cleanConsole();
             System.out.println("INVALID OPTION, PLEASE TRY AGAIN.");
             showMenu();
         }
@@ -78,10 +72,5 @@ public class Application {
             return new Monster(name, hp, attack, defense, criticalChance);
         else
             return new Hero(name, hp, attack, defense, criticalChance);
-    }
-
-    private void cleanConsole() {
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
     }
 }
