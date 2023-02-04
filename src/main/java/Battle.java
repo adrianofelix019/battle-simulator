@@ -20,9 +20,8 @@ public class Battle {
     public void startBattle() {
         System.out.println("===\tSTARTING BATTLE\t===");
         int turnCount = 1;
-        boolean isTheBattleNotOver = checkIfTheBattleIsOver();
 
-        while (isTheBattleNotOver) {
+        while (checkIfTheBattleIsNotOver()) {
             System.out.println("===\tTURN " + turnCount + " \t===");
 
             if (turn) {
@@ -31,7 +30,6 @@ public class Battle {
                 monstersAttack();
             }
             removeDeadCharacter();
-            isTheBattleNotOver = checkIfTheBattleIsOver();
             turn = !turn;
             turnCount++;
         }
@@ -46,10 +44,10 @@ public class Battle {
     }
 
     private void removeDeadCharacter() {
-        List<Hero> heroesAlive = heroes.stream().filter(hero -> hero.getHp() <= 0).toList();
+        List<Hero> heroesAlive = heroes.stream().filter(hero -> hero.getHp() > 0).toList();
         setHeroes(heroesAlive);
 
-        List<Monster> monstersAlive = monsters.stream().filter(monster -> monster.getHp() <= 0).toList();
+        List<Monster> monstersAlive = monsters.stream().filter(monster -> monster.getHp() > 0).toList();
         setMonsters(monstersAlive);
     }
 
@@ -57,7 +55,7 @@ public class Battle {
 
     }
 
-    private boolean checkIfTheBattleIsOver() {
+    private boolean checkIfTheBattleIsNotOver() {
         return getMonsters().size() > 0 && getHeroes().size() > 0;
     }
 
