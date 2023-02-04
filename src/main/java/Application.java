@@ -10,7 +10,7 @@ public class Application {
         System.out.println("[2] - CREATE A MONSTER");
         System.out.println("[3] - LIST CHARACTERS CREATED");
         System.out.println("[4] - START BATTLE");
-        System.out.println("[4] - EXIT");
+        System.out.println("[5] - EXIT");
         System.out.print("OPTION: ");
         String stringOption = in.next();
 
@@ -21,10 +21,28 @@ public class Application {
                 case 1 -> createHero();
                 case 2 -> createMonster();
                 case 3 -> listCharacters();
+                case 4 -> startBattle();
+                case 5 -> endApplication();
             }
 
         } catch (NumberFormatException e) {
             System.out.println("INVALID OPTION, PLEASE TRY AGAIN.");
+            showMenu();
+        }
+    }
+
+    private void endApplication() {
+        System.out.println("===\tEXITING\t===");
+    }
+
+    private void startBattle() {
+        boolean isPossibleToStart =
+                battle.getHeroes().size() > 0 && battle.getMonsters().size() > 0;
+
+        if (isPossibleToStart) {
+            battle.startBattle();
+        } else {
+            System.out.println("IS NOT POSSIBLE TO START THE BATTLE.");
             showMenu();
         }
     }
@@ -59,13 +77,13 @@ public class Application {
         Scanner in = new Scanner(System.in);
         System.out.print(kind + "'S NAME: ");
         String name = in.next();
-        System.out.println("SET " + kind + "'S HP: ");
+        System.out.print("SET " + kind + "'S HP: ");
         int hp = in.nextInt();
-        System.out.println("SET " + kind + "'S ATTACK: ");
+        System.out.print("SET " + kind + "'S ATTACK: ");
         int attack = in.nextInt();
-        System.out.println("SET " + kind + "'S DEFENSE: ");
+        System.out.print("SET " + kind + "'S DEFENSE: ");
         int defense = in.nextInt();
-        System.out.println("SET " + kind + "'S CRITICAL CHANCE (BETWEEN 0 AND 100): ");
+        System.out.print("SET " + kind + "'S CRITICAL CHANCE (BETWEEN 0 AND 100): ");
         int criticalChance = in.nextInt();
 
         if (kind.equalsIgnoreCase("monster"))
