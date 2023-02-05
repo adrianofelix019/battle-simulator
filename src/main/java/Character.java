@@ -21,7 +21,8 @@ public class Character {
 
     public void attackOpponent(Character opponent) {
         Random random = new Random();
-        boolean isCritic = random.nextFloat(0, 1) < criticalChance;
+        float randomNumber = random.nextFloat(0, 1);
+        boolean isCritic =  randomNumber < (criticalChance / 100);
         int damage;
 
         if (isCritic)
