@@ -39,6 +39,7 @@ public class Character {
         } else {
             System.out.println(this.getName() + " DEALT " + damage + " DAMAGE TO " + opponent.getName());
         }
+        System.out.println(opponent.getName() + "'S HP IS NOW " + opponent.getHp());
     }
 
     public void takeDamage(int damage) {
