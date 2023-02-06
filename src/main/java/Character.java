@@ -25,11 +25,14 @@ public class Character {
         boolean isCritic = randomNumber < (criticalChance / 100);
         int damage;
 
-        if (isCritic)
+        if (isCritic) {
             damage = (this.getAttack() * 2) - opponent.getDefense();
-        else
+        }
+        else {
             damage = this.getAttack() - opponent.getDefense();
+        }
 
+        damage = Math.max(damage, 0);
         opponent.takeDamage(damage);
         showDamageInformation(opponent, damage, isCritic);
     }
