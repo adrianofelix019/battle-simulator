@@ -22,7 +22,7 @@ public class Character {
     public void attackOpponent(Character opponent) {
         Random random = new Random();
         float randomNumber = random.nextFloat(0, 1);
-        boolean isCritic =  randomNumber < (criticalChance / 100);
+        boolean isCritic = randomNumber < (criticalChance / 100);
         int damage;
 
         if (isCritic)
@@ -89,12 +89,10 @@ public class Character {
 
     @Override
     public String toString() {
-        return "Character{" +
-                "name='" + name + '\'' +
-                ", hp=" + hp +
-                ", attack=" + attack +
-                ", defense=" + defense +
-                ", criticalChance=" + criticalChance +
-                '}';
+        return "NAME: " + name + "\n" +
+                "HP: " + hp + "\n" +
+                "ATTACK: " + attack + "\n" +
+                "DEFENSE: " + defense + "\n" +
+                "CRITICAL CHANCE: " + criticalChance + "\n";
     }
 }
