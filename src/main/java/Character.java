@@ -27,8 +27,7 @@ public class Character {
 
         if (isCritic) {
             damage = (this.getAttack() * 2) - opponent.getDefense();
-        }
-        else {
+        } else {
             damage = this.getAttack() - opponent.getDefense();
         }
 
@@ -43,7 +42,12 @@ public class Character {
         } else {
             System.out.println(this.getName() + " DEALT " + damage + " DAMAGE TO " + opponent.getName());
         }
-        System.out.println(opponent.getName() + "'S HP IS NOW " + opponent.getHp());
+
+        if (opponent.getHp() == 0) {
+            System.out.println(opponent.getName() + " HAS BEEN DEFEATED!");
+        } else {
+            System.out.println(opponent.getName() + "'S HP IS NOW " + opponent.getHp());
+        }
     }
 
     public void takeDamage(int damage) {
