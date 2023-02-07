@@ -47,7 +47,7 @@ public class Character {
     }
 
     public void takeDamage(int damage) {
-        this.hp -= damage;
+        this.hp = Math.max(this.hp -= damage, 0);
     }
 
     public String getName() {
