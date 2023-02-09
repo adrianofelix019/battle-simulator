@@ -1,8 +1,8 @@
 import java.util.Random;
 
 public class NameGenerator {
-    static private String[] consonants = "bcdfghjklmnpqrstvwxyz".split("");
-    static private String[] vowels = "aeiou".split("");
+    static private final String[] consonants = "bcdfghjklmnpqrstvwxyz".split("");
+    static private final String[] vowels = "aeiou".split("");
 
     public static String generateName(int length) {
         Random random = new Random();
