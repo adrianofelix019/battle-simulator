@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class Application {
-    private Battle battle = new Battle();
+    private final Battle battle = new Battle();
 
     public void showMenu() {
         Scanner in = new Scanner(System.in);
