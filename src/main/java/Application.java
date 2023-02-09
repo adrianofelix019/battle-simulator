@@ -75,16 +75,48 @@ public class Application {
 
     private Character getCharacterInformation(String kind) {
         Scanner in = new Scanner(System.in);
+        int hp;
+        int attack;
+        int defense;
+        int criticalChance;
         System.out.print(kind + "'S NAME: ");
         String name = in.next();
-        System.out.print("SET " + kind + "'S HP: ");
-        int hp = in.nextInt();
-        System.out.print("SET " + kind + "'S ATTACK: ");
-        int attack = in.nextInt();
-        System.out.print("SET " + kind + "'S DEFENSE: ");
-        int defense = in.nextInt();
-        System.out.print("SET " + kind + "'S CRITICAL CHANCE (BETWEEN 0 AND 100): ");
-        int criticalChance = in.nextInt();
+
+        do {
+            System.out.print("SET " + kind + "'S HP: ");
+            hp = in.nextInt();
+
+            if (hp <= 0) {
+                System.out.println("INVALID HP, TRY AGAIN!");
+            }
+        } while (hp <= 0);
+
+        do {
+            System.out.print("SET " + kind + "'S ATTACK: ");
+            attack = in.nextInt();
+
+            if (attack <= 0) {
+                System.out.println("INVALID ATTACK, TRY AGAIN!");
+            }
+        } while (attack <= 0);
+
+        do {
+            System.out.print("SET " + kind + "'S DEFENSE: ");
+            defense = in.nextInt();
+
+            if (defense <= 0) {
+                System.out.println("INVALID DEFENSE, TRY AGAIN!");
+            }
+        } while (defense <= 0);
+
+        do {
+            System.out.print("SET " + kind + "'S CRITICAL CHANCE (BETWEEN 0 AND 100): ");
+            criticalChance = in.nextInt();
+
+            if (criticalChance < 0 || criticalChance > 100) {
+                System.out.println("INVALID CRITICAL CHANCE, TRY AGAIN!");
+            }
+        } while (criticalChance < 0 || criticalChance > 100);
 
         if (kind.equalsIgnoreCase("monster"))
             return new Monster(name, hp, attack, defense, criticalChance);
