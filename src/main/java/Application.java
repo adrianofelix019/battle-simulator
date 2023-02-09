@@ -63,13 +63,13 @@ public class Application {
 
     private void createHero() {
         Hero newHero = (Hero) getCharacterInformation("HERO");
-        battle.getHeroes().add(newHero);
+        battle.addHero(newHero);
         showMenu();
     }
 
     private void createMonster() {
         Monster newMonster = (Monster) getCharacterInformation("MONSTER");
-        battle.getMonsters().add(newMonster);
+        battle.addMonster(newMonster);
         showMenu();
     }
 
