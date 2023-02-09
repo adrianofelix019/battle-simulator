@@ -79,8 +79,12 @@ public class Application {
         int attack;
         int defense;
         int criticalChance;
-        System.out.print(kind + "'S NAME: ");
-        String name = in.next();
+        System.out.print(kind + "'S NAME (LET IT EMPTY TO CREATE A RANDOM NAME): ");
+        String name = in.nextLine();
+
+        if (name.length() == 0) {
+            name = NameGenerator.generateName(5);
+        }
 
         do {
             System.out.print("SET " + kind + "'S HP: ");

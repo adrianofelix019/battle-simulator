@@ -1,6 +1,4 @@
-import java.util.Arrays;
 import java.util.Random;
-import java.util.stream.Collectors;
 
 public class NameGenerator {
     static private String[] consonants = "bcdfghjklmnpqrstvwxyz".split("");
