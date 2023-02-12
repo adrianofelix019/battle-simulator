@@ -1,7 +1,9 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Application {
     private final Battle battle = new Battle();
+    private final Scanner in = new Scanner(System.in);
 
     public void showMenu() {
         Scanner in = new Scanner(System.in);
@@ -74,57 +76,69 @@ public class Application {
     }
 
     private Character getCharacterInformation(String kind) {
-        Scanner in = new Scanner(System.in);
+        String name;
         int hp;
         int attack;
         int defense;
         int criticalChance;
-        System.out.print(kind + "'S NAME (LET IT EMPTY TO CREATE A RANDOM NAME): ");
-        String name = in.nextLine();
 
-        if (name.length() == 0) {
-            name = NameGenerator.generateName(5);
-        }
-
-        do {
-            System.out.print("SET " + kind + "'S HP: ");
-            hp = in.nextInt();
-
-            if (hp <= 0) {
-                System.out.println("INVALID HP, TRY AGAIN!");
-            }
-        } while (hp <= 0);
-
-        do {
-            System.out.print("SET " + kind + "'S ATTACK: ");
-            attack = in.nextInt();
-
-            if (attack <= 0) {
-                System.out.println("INVALID ATTACK, TRY AGAIN!");
-            }
-        } while (attack <= 0);
-
-        do {
-            System.out.print("SET " + kind + "'S DEFENSE: ");
-            defense = in.nextInt();
-
-            if (defense <= 0) {
-                System.out.println("INVALID DEFENSE, TRY AGAIN!");
-            }
-        } while (defense <= 0);
-
-        do {
-            System.out.print("SET " + kind + "'S CRITICAL CHANCE (BETWEEN 0 AND 100): ");
-            criticalChance = in.nextInt();
-
-            if (criticalChance < 0 || criticalChance > 100) {
-                System.out.println("INVALID CRITICAL CHANCE, TRY AGAIN!");
-            }
-        } while (criticalChance < 0 || criticalChance > 100);
+        name = getName(kind);
+        hp = getInformation("hp", kind);
+        attack = getInformation("attack", kind);
+        defense = getInformation("defense", kind);
+        criticalChance = getCriticalChance(kind);
 
         if (kind.equalsIgnoreCase("monster"))
             return new Monster(name, hp, attack, defense, criticalChance);
         else
             return new Hero(name, hp, attack, defense, criticalChance);
+    }
+
+    private int getInformation(String information, String kind) {
+        int info = 0;
+        System.out.print("SET " + kind.toUpperCase() + "'S " + information.toUpperCase() + ": ");
+        try {
+            info = in.nextInt();
+        } catch (InputMismatchException e) {
+            System.out.println("INVALID " + information + ", TRY AGAIN.");
+            getInformation(information, kind);
+        }
+
+        if (info < 0) {
+            System.out.println("INVALID " + information + ", TRY AGAIN.");
+            getInformation(information, kind);
+        }
+
+        return info;
+    }
+
+    private int getCriticalChance(String kind) {
+        int criticalChance = 0;
+
+        System.out.print("ENTER " + kind + "'S CRITICAL CHANCE(BETWEEN 0 AND 100): ");
+        try {
+            criticalChance = in.nextInt();
+        } catch (InputMismatchException e) {
+            System.out.println("INVALID CRITICAL CHANCE, TRY AGAIN.");
+            getCriticalChance(kind);
+        }
+
+        if (criticalChance > 100 || criticalChance < 0) {
+            System.out.println("INVALID CRITICAL CHANCE, TRY AGAIN.");
+            getCriticalChance(kind);
+        }
+
+        return criticalChance;
+    }
+
+    private String getName(String kind) {
+        System.out.print("ENTER " + kind + "'S NAME (LEAVE BLANK TO GENERATE A RANDOM NAME): ");
+        String name = in.nextLine();
+
+        if (name.length() == 0) {
+            name = NameGenerator.generateName(6);
+        }
+
+        return name;
     }
 }
