@@ -1,4 +1,3 @@
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Application {
@@ -95,30 +94,36 @@ public class Application {
     }
 
     private int getInformation(String information, String kind) {
-        int info = 0;
+        String info;
+        int intInfo = 0;
         System.out.print("SET " + kind.toUpperCase() + "'S " + information.toUpperCase() + ": ");
+        info = in.next();
+
         try {
-            info = in.nextInt();
-        } catch (InputMismatchException e) {
-            System.out.println("INVALID " + information + ", TRY AGAIN.");
+            intInfo = Integer.parseInt(info);
+        } catch (NumberFormatException e) {
+            System.out.println("INVALID " + information.toUpperCase() + ", TRY AGAIN.");
             getInformation(information, kind);
         }
 
-        if (info < 0) {
-            System.out.println("INVALID " + information + ", TRY AGAIN.");
+        if (intInfo < 0) {
+            System.out.println("INVALID " + information.toUpperCase() + ", TRY AGAIN.");
             getInformation(information, kind);
         }
 
-        return info;
+        return intInfo;
     }
 
     private int getCriticalChance(String kind) {
+        String criticalChanceString;
         int criticalChance = 0;
 
         System.out.print("ENTER " + kind + "'S CRITICAL CHANCE(BETWEEN 0 AND 100): ");
+        criticalChanceString = in.next();
+
         try {
-            criticalChance = in.nextInt();
-        } catch (InputMismatchException e) {
+            criticalChance = Integer.parseInt(criticalChanceString);
+        } catch (NumberFormatException e) {
             System.out.println("INVALID CRITICAL CHANCE, TRY AGAIN.");
             getCriticalChance(kind);
         }
